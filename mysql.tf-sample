@@ -1,0 +1,13 @@
+resource "aws_db_instance" "__MYSQL_SERVER_NAME__" {
+  allocated_storage    = 10
+  engine               = "mysql"
+  engine_version       = "8.0.23"
+  identifier           = "mysql-test"
+  instance_class       = "db.t2.micro"
+  name                 = "mydb"
+  username             = "admin"
+  password             = "veghai8U"
+  parameter_group_name = "default.mysql8.0"
+  publicly_accessible  = true
+  skip_final_snapshot  = true
+}

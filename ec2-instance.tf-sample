@@ -1,0 +1,37 @@
+# Sample config
+# - This config starts an Ubuntu 20.04 t2.micro instance in us-east-2c zone.
+# - Not required values:
+# -- root_block_device:volume_size defaults to 8 if not set
+# -- security_groups (included for sample purposes)
+# -- vpc_security_group_ids (included for sample purposes)
+
+resource "aws_instance" "__SERVER_NAME__" {
+  ami           = "ami-0fb653ca2d3203ac1"
+  availability_zone = "us-east-2c" 
+  instance_type = "t2.micro"
+  key_name      = "__KEY_NAME__"
+
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file("__PATH_TO_KEY__")
+    timeout     = "4m"
+  }
+
+  root_block_device {
+    volume_size = 16
+  }
+
+  security_groups = [
+    "__SECURITY_GROUP_NAME__"
+  ]
+
+  vpc_security_group_ids = [
+    "__SECURITY_GROUP_ID__"
+  ]
+
+  tags = {
+    Name = "__SERVER_NAME__"
+  }
+}
